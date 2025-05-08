@@ -28,7 +28,7 @@ function operate(a, b, operator) {
     case '*':
       return multiply(a,b);
     case '/':
-      return multiply(a,b);
+      return divide(a,b);
   }
 }
 
@@ -53,9 +53,10 @@ buttons.forEach((button) => {
         display(operate(numberA,numberB,operator));
         count = 0;
       }
+    } else {
+      input += button.className;
     }
     if(count===2) console.log(`TWO OPERATORS - ${numberA} ${operator} ${numberB}`);
-    input += button.className;
   })
 })
 
