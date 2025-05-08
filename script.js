@@ -1,4 +1,6 @@
-let numberA, numberB, operator
+let numberA, numberB, operator;
+let input = '';
+const digitOperator = ['1234567890+-*/'];
 
 function add(a,b) {
   return a+b;
@@ -37,6 +39,7 @@ function display(content) {
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
-    console.log(button.className);
+    input += button.className;
   })
 })
+
