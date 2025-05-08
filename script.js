@@ -37,7 +37,7 @@ function display(content) {
   displayDiv.textContent = content;
 }
 
-let numberOfOperatorCount = 0;
+let stage = 0;
 
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
@@ -49,8 +49,21 @@ buttons.forEach((button) => {
     // if the following input is a digit number, store the operator and start storing that input as numberB (stage 1>2)
     // if the following input is a operator, keep the numberB (stage 2>3)
     // in stage 3, operate the math and display the value on HTML (stage 3>0)
-    if(parseInt(userInput)) {
-      numberA += userInput;
-    } 
+    switch (stage) {
+      case 0:
+        if(parseInt(userInput)) {
+          numberA += userInput;
+        } else {
+          operator = userInput;
+          stage++;
+        }
+        break;
+      case 1:
+        break;
+      case 2:
+        break;
+      case 3:
+        break;
+    }
   })
 })
