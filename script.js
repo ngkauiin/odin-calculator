@@ -30,7 +30,11 @@ function operate(a, b, operator) {
     case '*':
       return multiply(a,b);
     case '/':
-      return divide(a,b);
+      if(b===0) {
+        return "can't divided by 0"
+      } else {
+        return divide(a,b);
+      }
   }
 }
 
@@ -62,29 +66,29 @@ buttons.forEach((button) => {
 
     switch (stage) {
       case 0:
-        if(parseInt(userInput)) {
+        if(parseInt(userInput) || parseInt(userInput) === 0) {
           numberA += userInput;
         } else {
-          operator = userInput;
+          saveLastOperator(userInput);
           stage++;
         }
         break;
       case 1:
-        if(!parseInt(userInput)) {
-          operator = userInput;
+        if(!parseInt(userInput) && parseInt(userInput)!==0) {
+          saveLastOperator(userInput);
         } else {
           numberB += userInput;
           stage++;
         }
         break;
       case 2:
-        if(parseInt(userInput)) {
+        if(parseInt(userInput) || parseInt(userInput) === 0) {
           numberB += userInput;
         } else {
           numberA = operate(numberA,numberB,operator);
           display(numberA);
           if(userInput!=='=') {
-            operator = userInput;
+            saveLastOperator(userInput);
             numberB = '0';
             stage = 1;
           } else if (userInput==='=') {
@@ -93,7 +97,7 @@ buttons.forEach((button) => {
         }
         break;
       case 3:
-        if (parseInt(userInput)) {
+        if (parseInt(userInput) || parseInt(userInput) === 0) {
           numberA = userInput;
           numberB = '0';
           operator = '';
@@ -103,7 +107,7 @@ buttons.forEach((button) => {
             numberA = operate(numberA,numberB,operator);
             display(numberA);
           } else {
-            operator = userInput;
+            saveLastOperator(userInput);
             numberB = '0';
             stage = 1;
           }
@@ -120,6 +124,10 @@ function clearAll() {
   input = '';
   stage = 0;
   display(numberA);
+}
+
+function saveLastOperator(input) {
+  if(input!=='=') operator = input;
 }
 
 
