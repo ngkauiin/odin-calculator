@@ -53,6 +53,7 @@ buttons.forEach((button) => {
         numberB = parseInt(input);
         display(operate(numberA,numberB,operator));
         numberOfOperatorCount = 0;
+        input = '';
       }
     } else {
       input += button.className;
