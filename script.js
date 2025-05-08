@@ -31,7 +31,7 @@ function operate(a, b, operator) {
       return multiply(a,b);
     case '/':
       if(b===0) {
-        return "can't divided by 0"
+        return false;
       } else {
         return divide(a,b);
       }
@@ -85,8 +85,15 @@ buttons.forEach((button) => {
         if(parseInt(userInput) || parseInt(userInput) === 0) {
           numberB += userInput;
         } else {
-          numberA = operate(numberA,numberB,operator);
-          display(numberA);
+          const result = operate(numberA,numberB,operator);
+          if(!operate(numberA,numberB,operator)) {
+            clearAll();
+            display('Cannot divided by zero');
+            break;
+          } else {
+            numberA = result;
+            display(numberA);
+          }
           if(userInput!=='=') {
             saveLastOperator(userInput);
             numberB = '0';
@@ -104,8 +111,15 @@ buttons.forEach((button) => {
           stage = 0;
         } else {
           if (userInput === '=') {
-            numberA = operate(numberA,numberB,operator);
-            display(numberA);
+            const result = operate(numberA,numberB,operator);
+            if(!operate(numberA,numberB,operator)) {
+              clearAll();
+              display('Cannot divided by zero')
+              break;
+            } else {
+              numberA = result;
+              display(numberA);
+            }
           } else {
             saveLastOperator(userInput);
             numberB = '0';
@@ -129,5 +143,3 @@ function clearAll() {
 function saveLastOperator(input) {
   if(input!=='=') operator = input;
 }
-
-
