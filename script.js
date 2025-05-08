@@ -41,10 +41,13 @@ function display(content) {
 
 let stage = 0;
 
+clearAll();
+
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
     const userInput = button.className;
+    if(userInput==='c') return clearAll();
     // (stage 0) check if input is digit number, if so then add that to numberA
     // (stage 0>1) if the input changed to operator, keep the numberA and store the operator 
     // (stage 1) if the following input is also operator, keep changing the operator
@@ -109,3 +112,14 @@ buttons.forEach((button) => {
     }
   })
 })
+
+function clearAll() {
+  numberA = '0';
+  numberB = '0';
+  operator = '';
+  input = '';
+  stage = 0;
+  display(numberA);
+}
+
+
