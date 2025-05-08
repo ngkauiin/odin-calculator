@@ -1,6 +1,6 @@
 let numberA, numberB, operator;
 let input = '';
-const digitOperator = ['1234567890+-*/'];
+const digitOperator = '1234567890+-*/=';
 
 function add(a,b) {
   return a+b;
@@ -35,6 +35,8 @@ function display(content) {
   const displayDiv = document.querySelector('.display');
   displayDiv.textContent = content;
 }
+
+let count = 0;
 
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
