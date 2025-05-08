@@ -37,37 +37,31 @@ function display(content) {
   displayDiv.textContent = content;
 }
 
-let count = 0;
+let numberOfOperatorCount = 0;
 
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
     if(checkIfOperators(button.className)) {
-      count++;
-      if(count === 1) {
+      numberOfOperatorCount++;
+      if(numberOfOperatorCount === 1) {
         numberA = parseInt(input);
         operator = button.className;
         input = '';
-      } else if (count === 2) {
+      } else if (numberOfOperatorCount === 2) {
+        if(!numberA) numberA = 0;
         numberB = parseInt(input);
         display(operate(numberA,numberB,operator));
-        count = 0;
+        numberOfOperatorCount = 0;
       }
     } else {
       input += button.className;
     }
-    if(count===2) console.log(`TWO OPERATORS - ${numberA} ${operator} ${numberB}`);
+    if(numberOfOperatorCount===2) console.log(`TWO OPERATORS - ${numberA} ${operator} ${numberB}`);
   })
 })
 
-// 111+111=
-// If the input is one of the operator then count++
-// If count === 2, then operate and display
-// Else if the input is one of the digits, then continue to add onto input
-
 function checkIfOperators(input) {
   const operators = '+-*/=';
-  return operators
-              .split('')
-              .some((operator) => operator === input);
+  return operators.split('').some((operator) => operator === input);
 }
