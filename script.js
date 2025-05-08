@@ -43,6 +43,12 @@ const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
     const userInput = button.className;
+    // check if input is digit number, if so then add that to numberA (stage 0)
+    // if the input changed to operator, keep the numberA and store the operator (stage 0>1)
+    // if the following input is also operator, keep changing the operator (stage 1)
+    // if the following input is a digit number, store the operator and start storing that input as numberB (stage 1>2)
+    // if the following input is a operator, keep the numberB (stage 2>3)
+    // in stage 3, operate the math and display the value on HTML (stage 3>0)
     if(parseInt(userInput)) {
       numberA += userInput;
     } 
