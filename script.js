@@ -20,6 +20,8 @@ function divide(a,b) {
 }
 
 function operate(a, b, operator) {
+  a = parseInt(a);
+  b = parseInt(b);
   switch(operator) {
     case '+':
       return add(a,b);
@@ -93,9 +95,15 @@ buttons.forEach((button) => {
           numberB = '0';
           operator = '';
           stage = 0;
-        } else if (userInput === '=') {
-          numberA = operate(numberA,numberB,operator);
-          display(numberA);
+        } else {
+          if (userInput === '=') {
+            numberA = operate(numberA,numberB,operator);
+            display(numberA);
+          } else {
+            operator = userInput;
+            numberB = '0';
+            stage = 1;
+          }
         }
         break;
     }
