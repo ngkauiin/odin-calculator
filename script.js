@@ -1,6 +1,7 @@
 let numberA, numberB, operator;
 let input = '';
-const digitOperator = '1234567890+-*/=';
+const digits = '1234567890';
+const operators = '+-*/=';
 
 function add(a,b) {
   return a+b;
@@ -45,3 +46,14 @@ buttons.forEach((button) => {
   })
 })
 
+// 111+111=
+// If the input is one of the operator then count++
+// If count === 2, then operate and display
+// Else if the input is one of the digits, then continue to add onto input
+
+function checkIfOperators(input) {
+  const operators = '+-*/=';
+  return operators
+              .split('')
+              .some((operator) => operator === input);
+}
