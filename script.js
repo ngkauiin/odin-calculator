@@ -70,7 +70,7 @@ buttons.forEach((button) => {
           numberA += userInput;
         } else {
           saveLastOperator(userInput);
-          stage++;
+          stage = 1;
         }
         break;
       case 1:
@@ -78,7 +78,7 @@ buttons.forEach((button) => {
           saveLastOperator(userInput);
         } else {
           numberB += userInput;
-          stage++;
+          stage = 2;
         }
         break;
       case 2:
@@ -91,7 +91,7 @@ buttons.forEach((button) => {
             display('Cannot divided by zero');
             break;
           } else {
-            numberA = result;
+            numberA = result+'';
             display(numberA);
           }
           if(userInput!=='=') {
@@ -117,7 +117,7 @@ buttons.forEach((button) => {
               display('Cannot divided by zero')
               break;
             } else {
-              numberA = result;
+              numberA = result+'';
               display(numberA);
             }
           } else {
