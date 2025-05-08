@@ -43,15 +43,16 @@ const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
     if(checkIfOperators(button.className)) {
-      if(count === 0) {
+      count++;
+      if(count === 1) {
         numberA = parseInt(input);
         operator = button.className;
         input = '';
-      } else if (count === 1) {
+      } else if (count === 2) {
         numberB = parseInt(input);
         display(operate(numberA,numberB,operator));
+        count = 0;
       }
-      count++;
     }
     if(count===2) console.log(`TWO OPERATORS - ${numberA} ${operator} ${numberB}`);
     input += button.className;
