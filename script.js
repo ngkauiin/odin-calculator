@@ -1,7 +1,7 @@
-let numberA, numberB, operator;
+let numberA = 0;
+let numberB = 0;
+let operator;
 let input = '';
-const digits = '1234567890';
-const operators = '+-*/=';
 
 function add(a,b) {
   return a+b;
@@ -42,6 +42,17 @@ let count = 0;
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
+    if(checkIfOperators(button.className)) {
+      if(count === 0) {
+        numberA = parseInt(input);
+        operator = button.className;
+        input = '';
+      } else if (count === 1) {
+        numberB = parseInt(input);
+      }
+      count++;
+    }
+    if(count===2) console.log(`TWO OPERATORS - ${numberA} ${operator} ${numberB}`);
     input += button.className;
   })
 })
