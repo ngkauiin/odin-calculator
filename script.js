@@ -59,6 +59,12 @@ buttons.forEach((button) => {
         }
         break;
       case 1:
+        if(!parseInt(userInput)) {
+          operator = userInput;
+        } else {
+          numberB += userInput;
+          stage++;
+        }
         break;
       case 2:
         break;
