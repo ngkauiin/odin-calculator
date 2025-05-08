@@ -49,6 +49,7 @@ buttons.forEach((button) => {
         input = '';
       } else if (count === 1) {
         numberB = parseInt(input);
+        display(operate(numberA,numberB,operator));
       }
       count++;
     }
