@@ -67,6 +67,14 @@ buttons.forEach((button) => {
         }
         break;
       case 2:
+        if(parseInt(userInput)) {
+          numberB += userInput;
+        } else {
+          numberA = operate(numberA,numberB,operator);
+          display(numberA);
+          operator = userInput;
+          stage++;
+        }
         break;
       case 3:
         break;
