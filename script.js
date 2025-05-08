@@ -1,5 +1,5 @@
-let numberA = 0;
-let numberB = 0;
+let numberA = '';
+let numberB = '';
 let operator;
 let input = '';
 
@@ -42,27 +42,9 @@ let numberOfOperatorCount = 0;
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
-    if(checkIfOperators(button.className)) {
-      numberOfOperatorCount++;
-      if(numberOfOperatorCount === 1) {
-        numberA = parseInt(input);
-        operator = button.className;
-        input = '';
-      } else if (numberOfOperatorCount === 2) {
-        if(!numberA) numberA = 0;
-        numberB = parseInt(input);
-        display(operate(numberA,numberB,operator));
-        numberOfOperatorCount = 0;
-        input = '';
-      }
-    } else {
-      input += button.className;
-    }
-    if(numberOfOperatorCount===2) console.log(`TWO OPERATORS - ${numberA} ${operator} ${numberB}`);
+    const userInput = button.className;
+    if(parseInt(userInput)) {
+      numberA += userInput;
+    } 
   })
 })
-
-function checkIfOperators(input) {
-  const operators = '+-*/=';
-  return operators.split('').some((operator) => operator === input);
-}
