@@ -29,7 +29,10 @@ function operate(a, b, operator) {
   }
 }
 
-const displayDiv = document.querySelector('.display');
+function display(content) {
+  const displayDiv = document.querySelector('.display');
+  displayDiv.textContent = content;
+}
 
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => {
