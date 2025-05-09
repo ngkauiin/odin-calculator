@@ -84,8 +84,7 @@ buttons.forEach((button) => {
           content = parseFloat(currentNumber)+'';
         } else if (userInput==='.') {
           if(!storage.dotExisted) {
-            storage.dotExisted = true;
-            currentNumber += '.';
+            currentNumber_Dot();
             content = parseFloat(currentNumber) + '.';
           }
         } else {
@@ -104,8 +103,7 @@ buttons.forEach((button) => {
           content += userInput;
         } else if(userInput==='.') {
           if(!storage.dotExisted) {
-            storage.dotExisted = true;
-            currentNumber += '.';
+            currentNumber_Dot();
             content = content + parseFloat(currentNumber) + '.';
           }
         } else {
@@ -119,8 +117,7 @@ buttons.forEach((button) => {
           content += userInput;
         } else if (userInput==='.'){
           if(!storage.dotExisted) {
-            storage.dotExisted = true;
-            currentNumber += '.';
+            currentNumber_Dot();
             content += userInput;
           }
         } else {
@@ -154,7 +151,7 @@ buttons.forEach((button) => {
           content = parseFloat(currentNumber)+'';
         } else if (userInput==='.'){
           if(!dotExisted) {
-            currentNumber += userInput;
+            currentNumber_Dot();
             storage.numberB = '0';
             storage.operator = '';
             storage.stage = 0;
@@ -211,4 +208,9 @@ function isNumber(userInput) {
 function dividedByZero() {
   clearAll();
   display('CANNOT DIVIDED BY ZERO');
+}
+
+function currentNumber_Dot() {
+  storage.dotExisted = true;
+  currentNumber += '.';
 }
