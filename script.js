@@ -15,8 +15,8 @@ function divide(a,b) {
 }
 
 function operate(a, b, operator) {
-  a = parseInt(a);
-  b = parseInt(b);
+  a = parseFloat(a);
+  b = parseFloat(b);
   switch(operator) {
     case '+':
       return add(a,b);
@@ -44,6 +44,7 @@ let numberB = '0';
 let operator = '';
 let content = '';
 let toDecimal = 7;
+let dotExisted = false;
 
 clearAll();
 
@@ -52,7 +53,7 @@ buttons.forEach((button) => {
   button.addEventListener('click', () => {
     const userInput = button.className;
     if(userInput==='c') return clearAll();
-    if(userInput==='=' && !operator) return;
+    if((userInput==='=') && !operator) return;
     // (stage 0) check if input is digit number, if so then add that to numberA
     // (stage 0>1) if the input changed to operator, keep the numberA and store the operator 
     // (stage 1) if the following input is also operator, keep changing the operator
@@ -71,10 +72,17 @@ buttons.forEach((button) => {
         if(isNumber(userInput)) {
           numberA += userInput;
           content = parseFloat(numberA)+'';
+        } else if (userInput==='.'){
+          if(!dotExisted) {
+            numberA += userInput;
+            content = parseFloat(numberA) + '.';
+            dotExisted = true;
+          }
         } else {
           saveLastOperator(userInput);
           stage = 1;
-          content = parseFloat(numberA)+userInput;
+          dotExisted = false;
+          content += userInput;
         }
         break;
       case 1: // get operator
@@ -82,6 +90,11 @@ buttons.forEach((button) => {
           numberB += userInput;
           stage = 2;
           content = parseFloat(numberA)+operator+parseFloat(numberB)+'';
+        } else if (userInput==='.'){
+          numberB += userInput;
+          content = content + parseFloat(numberB) + '.';
+          dotExisted = true;
+
         } else {
           saveLastOperator(userInput);
           content = content.slice(0,-1)+userInput;
@@ -91,7 +104,14 @@ buttons.forEach((button) => {
         if(isNumber(userInput)) {
           numberB += userInput;
           content = parseFloat(numberA)+operator+parseFloat(numberB)+'';
+        } else if (userInput==='.'){
+          if(!dotExisted) {
+            numberB += userInput;
+            content = parseFloat(numberA)+operator+parseFloat(numberB)+'.';
+            dotExisted = true;
+          }
         } else {
+          dotExisted = false;
           const result = operate(numberA,numberB,operator);
           if(result===false) {
             dividedByZero();
@@ -117,6 +137,14 @@ buttons.forEach((button) => {
           operator = '';
           stage = 0;
           content = parseFloat(numberA)+'';
+        } else if (userInput==='.'){
+          if(!dotExisted) {
+            numberA = '0.';
+            numberB = '0';
+            operator = '';
+            stage = 0;
+            content = parseFloat(numberA)+'.';
+          }
         } else {
           if (userInput === '=') {
             const result = operate(numberA,numberB,operator);
