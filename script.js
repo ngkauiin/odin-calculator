@@ -1,8 +1,3 @@
-let numberA = '0';
-let numberB = '0';
-let operator = '';
-let input = '';
-
 function add(a,b) {
   return a+b;
 }
@@ -44,6 +39,10 @@ function display(content) {
 }
 
 let stage = 0;
+let numberA = '0';
+let numberB = '0';
+let operator = '';
+let input = '';
 
 clearAll();
 
