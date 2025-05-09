@@ -71,15 +71,15 @@ buttons.forEach((button) => {
           content += userInput;
         } else {
           saveLastOperator(userInput);
-          content += userInput;
           stage = 1;
+          content += userInput;
         }
         break;
       case 1:
         if(isNumber(userInput)) {
           numberB += userInput;
-          content += userInput;
           stage = 2;
+          content += userInput;
         } else {
           saveLastOperator(userInput);
           content = content.slice(0,-1)+userInput;
@@ -101,6 +101,7 @@ buttons.forEach((button) => {
           }
           if(userInput!=='=') {
             saveLastOperator(userInput);
+            content+=userInput;
             numberB = '0';
             stage = 1;
           } else if (userInput==='=') {
@@ -114,7 +115,6 @@ buttons.forEach((button) => {
           numberB = '0';
           operator = '';
           stage = 0;
-
           content = userInput;
         } else {
           if (userInput === '=') {
