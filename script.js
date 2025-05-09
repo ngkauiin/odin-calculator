@@ -45,7 +45,8 @@ let operator = '';
 let content = '';
 let toDecimal = 7;
 let dotExisted = false;
-let currentNumber = '';
+
+let currentNumber = '0';
 
 let storage = {
   numberA: '0',
@@ -79,18 +80,20 @@ buttons.forEach((button) => {
     switch (stage) {
       case 0: // get first number
         if(isNumber(userInput)) {
-          numberA += userInput;
-          content = parseFloat(numberA)+'';
+          currentNumber += userInput;
+          content = parseFloat(currentNumber)+'';
         } else if (userInput==='.'){
           if(!dotExisted) {
-            numberA += userInput;
-            content = parseFloat(numberA) + '.';
-            dotExisted = true;
+            storage.dotExisted = true;
+            currentNumber += userInput;
+            content = parseFloat(currentNumber) + '.';
           }
         } else {
+          storage.numberA = currentNumber;
+          currentNumber = '0';
+          storage.dotExisted = false;
           saveLastOperator(userInput);
-          stage = 1;
-          dotExisted = false;
+          storage.stage = 1;
           content += userInput;
         }
         break;
@@ -187,7 +190,7 @@ function clearAll() {
 }
 
 function saveLastOperator(input) {
-  if(input!=='=') operator = input;
+  if(input!=='=') storage.operator = input;
 }
 
 function roundNumberTo(num, precision) {
