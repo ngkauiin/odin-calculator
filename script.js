@@ -43,6 +43,7 @@ let numberA = '0';
 let numberB = '0';
 let operator = '';
 let input = '';
+let toDecimal = 7;
 
 clearAll();
 
@@ -91,7 +92,7 @@ buttons.forEach((button) => {
             break;
           } else {
             numberA = result+'';
-            display(numberA);
+            display(roundNumberTo(numberA,toDecimal));
           }
           if(userInput!=='=') {
             saveLastOperator(userInput);
@@ -117,7 +118,7 @@ buttons.forEach((button) => {
               break;
             } else {
               numberA = result+'';
-              display(numberA);
+              display(roundNumberTo(numberA,toDecimal));
             }
           } else {
             saveLastOperator(userInput);
@@ -136,9 +137,14 @@ function clearAll() {
   operator = '';
   input = '';
   stage = 0;
-  display(numberA);
+  display(roundNumberTo(numberA, toDecimal));
 }
 
 function saveLastOperator(input) {
   if(input!=='=') operator = input;
+}
+
+function roundNumberTo(num, precision) {
+  let multiplier = Math.pow(10, precision || 0);
+  return Math.round(num*multiplier)/multiplier;
 }
