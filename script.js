@@ -86,7 +86,7 @@ buttons.forEach((button) => {
           numberB += userInput;
         } else {
           const result = operate(numberA,numberB,operator);
-          if(!operate(numberA,numberB,operator)) {
+          if(result===false) {
             clearAll();
             display('Cannot divided by zero');
             break;
@@ -112,7 +112,7 @@ buttons.forEach((button) => {
         } else {
           if (userInput === '=') {
             const result = operate(numberA,numberB,operator);
-            if(!operate(numberA,numberB,operator)) {
+            if(result===false) {
               clearAll();
               display('Cannot divided by zero')
               break;
