@@ -83,9 +83,9 @@ buttons.forEach((button) => {
           currentNumber += userInput;
           content = parseFloat(currentNumber)+'';
         } else if (userInput==='.'){
-          if(!dotExisted) {
+          if(!storage.dotExisted) {
             storage.dotExisted = true;
-            currentNumber += userInput;
+            currentNumber += '.';
             content = parseFloat(currentNumber) + '.';
           }
         } else {
@@ -102,9 +102,9 @@ buttons.forEach((button) => {
           currentNumber += userInput;
           storage.stage = 2;
           content += userInput;
-        } else if (userInput==='.'){
+        } else if (userInput==='.' && !storage.dotExisted) {
           storage.dotExisted = true;
-          currentNumber += userInput;
+          currentNumber += '.';
           content = content + parseFloat(currentNumber) + '.';
         } else {
           saveLastOperator(userInput);
@@ -113,31 +113,33 @@ buttons.forEach((button) => {
         break;
       case 2: // get second number
         if(isNumber(userInput)) {
-          numberB += userInput;
+          currentNumber += userInput;
           content += userInput;
         } else if (userInput==='.'){
-          if(!dotExisted) {
-            numberB += userInput;
+          if(!storage.dotExisted) {
+            storage.dotExisted = true;
+            currentNumber += '.';
             content += userInput;
-            dotExisted = true;
           }
         } else {
-          dotExisted = false;
-          const result = operate(numberA,numberB,operator);
+          storage.dotExisted = false;
+          storage.numberB = currentNumber;
+          currentNumber = '0';
+          const result = operate(storage.numberA,storage.numberB,storage.operator);
           if(result===false) {
             dividedByZero();
             return;
           } else {
-            numberA = result + '';
-            content = roundNumberTo(numberA,toDecimal)+'';
+            storage.numberA = result + '';
+            content = roundNumberTo(storage.numberA,toDecimal)+'';
           }
           if(userInput!=='=') {
             saveLastOperator(userInput);
             content+=userInput;
-            numberB = '0';
-            stage = 1;
+            storage.numberB = '0';
+            storage.stage = 1;
           } else if (userInput==='=') {
-            stage = 3;
+            storage.stage = 3;
           }
         }
         break;
