@@ -130,7 +130,7 @@ buttons.forEach((button) => {
             dividedByZero();
             return;
           } else {
-            storage.numberA = result + '';
+            storage.numberA = result+'';
             content = roundNumberTo(storage.numberA,toDecimal)+'';
           }
           if(userInput!=='=') {
@@ -145,34 +145,34 @@ buttons.forEach((button) => {
         break;
       case 3: // transition after '='
         if (isNumber(userInput)) {
-          numberA = userInput;
-          numberB = '0';
-          operator = '';
-          stage = 0;
-          content = parseFloat(numberA)+'';
+          currentNumber += userInput;
+          storage.numberB = '0';
+          storage.operator = '';
+          storage.stage = 0;
+          content = parseFloat(currentNumber)+'';
         } else if (userInput==='.'){
           if(!dotExisted) {
-            numberA = '0.';
-            numberB = '0';
-            operator = '';
-            stage = 0;
-            content = parseFloat(numberA)+'.';
+            currentNumber += userInput;
+            storage.numberB = '0';
+            storage.operator = '';
+            storage.stage = 0;
+            content = parseFloat(currentNumber)+'.';
           }
         } else {
           if (userInput === '=') {
-            const result = operate(numberA,numberB,operator);
+            const result = operate(storage.numberA,storage.numberB,storage.operator);
             if(result===false) {
               dividedByZero();
               return;
             } else {
-              numberA = result+'';
-              content = roundNumberTo(numberA,toDecimal)+'';
+              storage.numberA = result+'';
+              content = roundNumberTo(storage.numberA,toDecimal)+'';
             }
           } else {
             saveLastOperator(userInput);
             content += userInput;
-            numberB = '0';
-            stage = 1;
+            storage.numberB = '0';
+            storage.stage = 1;
           }
         }
         break;
@@ -182,12 +182,15 @@ buttons.forEach((button) => {
 })
 
 function clearAll() {
-  numberA = '0';
-  numberB = '0';
-  operator = '';
-  content = numberA;
-  stage = 0;
-  display(numberA);
+  storage = {
+    numberA: '0',
+    numberB: '0',
+    operator: '',
+    stage: 0,
+    dotExisted: false,
+  }
+  content = storage.numberA;
+  display(storage.numberA);
 }
 
 function saveLastOperator(input) {
