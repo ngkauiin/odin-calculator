@@ -45,6 +45,15 @@ let operator = '';
 let content = '';
 let toDecimal = 7;
 let dotExisted = false;
+let currentNumber = '';
+
+let storage = {
+  numberA: '0',
+  numberB: '0',
+  operator: '',
+  stage: 0,
+  dotExisted: false,
+}
 
 clearAll();
 
@@ -53,7 +62,8 @@ buttons.forEach((button) => {
   button.addEventListener('click', () => {
     const userInput = button.className;
     if(userInput==='c') return clearAll();
-    if((userInput==='=') && !operator) return;
+    if((userInput==='=') && !operator) return;  // ignore '=' at the very beginning
+    
     // (stage 0) check if input is digit number, if so then add that to numberA
     // (stage 0>1) if the input changed to operator, keep the numberA and store the operator 
     // (stage 1) if the following input is also operator, keep changing the operator
@@ -65,7 +75,6 @@ buttons.forEach((button) => {
     // (stage 3) if the next input is digits, CLEAR and go to stage 0
     // (stage 3) if the next input is a oeprator (not =), clear numberB, store the operator and go to stage 1
     // (stage 3) if the next input is also '=', do the operate(a,b,x) and display with the previous operator
-
 
     switch (stage) {
       case 0: // get first number
