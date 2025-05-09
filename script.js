@@ -72,7 +72,7 @@ buttons.forEach((button) => {
         } else {
           saveLastOperator(userInput);
           stage = 1;
-          content += userInput;
+          content = parseFloat(numberA)+userInput;
         }
         break;
       case 1:
@@ -92,9 +92,8 @@ buttons.forEach((button) => {
         } else {
           const result = operate(numberA,numberB,operator);
           if(result===false) {
-            clearAll();
-            display('Cannot divided by zero');
-            break;
+            dividedByZero();
+            return;
           } else {
             numberA = result+'';
             content = roundNumberTo(numberA,toDecimal)+'';
@@ -120,9 +119,8 @@ buttons.forEach((button) => {
           if (userInput === '=') {
             const result = operate(numberA,numberB,operator);
             if(result===false) {
-              clearAll();
-              display('Cannot divided by zero')
-              break;
+              dividedByZero();
+              return;
             } else {
               numberA = result+'';
               content = roundNumberTo(numberA,toDecimal)+'';
@@ -160,4 +158,9 @@ function roundNumberTo(num, precision) {
 
 function isNumber(userInput) {
   if(parseFloat(userInput) || parseFloat(userInput) === 0) return true
+}
+
+function dividedByZero() {
+  clearAll();
+  display('CANNOT DIVIDED BY ZERO');
 }
