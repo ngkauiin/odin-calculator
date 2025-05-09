@@ -88,9 +88,7 @@ buttons.forEach((button) => {
             content = parseFloat(currentNumber) + '.';
           }
         } else {
-          storage.numberA = currentNumber;
-          currentNumber = '0';
-          storage.dotExisted = false;
+          saveToNumber('A',currentNumber);
           saveLastOperator(userInput);
           storage.stage = 1;
           content += userInput;
@@ -121,15 +119,13 @@ buttons.forEach((button) => {
             content += userInput;
           }
         } else {
-          storage.dotExisted = false;
-          storage.numberB = currentNumber;
-          currentNumber = '0';
+          saveToNumber('B',currentNumber);
           const result = operate(storage.numberA,storage.numberB,storage.operator);
           if(result===false) {
             dividedByZero();
             return;
           } else {
-            storage.numberA = result+'';
+            saveToNumber('A',result+'');
             content = roundNumberTo(storage.numberA,toDecimal)+'';
           }
           if(userInput!=='=') {
@@ -164,7 +160,7 @@ buttons.forEach((button) => {
               dividedByZero();
               return;
             } else {
-              storage.numberA = result+'';
+              saveToNumber('A',result+'');
               content = roundNumberTo(storage.numberA,toDecimal)+'';
             }
           } else {
@@ -213,4 +209,18 @@ function dividedByZero() {
 function currentNumber_Dot() {
   storage.dotExisted = true;
   currentNumber += '.';
+}
+
+function saveToNumber(index, value) {
+  const numberIndex = 'number'+index;
+  storage[numberIndex] = value;
+  storage.dotExisted = false;
+  currentNumber = '0';
+}
+
+function moveToStage_Zero() {
+  storage.numberB = '0';
+  storage.operator = '';
+  storage.stage = 0;
+  content = parseFloat(currentNumber)+'.';
 }
