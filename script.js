@@ -65,7 +65,7 @@ buttons.forEach((button) => {
     // (stage 3) if the next input is also '=', do the operate(a,b,x) and display with the previous operator
 
     switch (stage) {
-      case 0:
+      case 0: // get first number
         if(isNumber(userInput)) {
           numberA += userInput;
           content += userInput;
@@ -75,7 +75,7 @@ buttons.forEach((button) => {
           content = parseFloat(numberA)+userInput;
         }
         break;
-      case 1:
+      case 1: // get operator
         if(isNumber(userInput)) {
           numberB += userInput;
           stage = 2;
@@ -85,7 +85,7 @@ buttons.forEach((button) => {
           content = content.slice(0,-1)+userInput;
         }
         break;
-      case 2:
+      case 2: // get second number
         if(isNumber(userInput)) {
           numberB += userInput;
           content += userInput;
@@ -108,7 +108,7 @@ buttons.forEach((button) => {
           }
         }
         break;
-      case 3:
+      case 3: // transition after '='
         if (isNumber(userInput)) {
           numberA = userInput;
           numberB = '0';
