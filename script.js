@@ -77,7 +77,7 @@ buttons.forEach((button) => {
     // (stage 3) if the next input is a oeprator (not =), clear numberB, store the operator and go to stage 1
     // (stage 3) if the next input is also '=', do the operate(a,b,x) and display with the previous operator
 
-    switch (stage) {
+    switch (storage.stage) {
       case 0: // get first number
         if(isNumber(userInput)) {
           currentNumber += userInput;
@@ -99,14 +99,13 @@ buttons.forEach((button) => {
         break;
       case 1: // get operator
         if(isNumber(userInput)) {
-          numberB += userInput;
-          stage = 2;
-          content+=userInput;
+          currentNumber += userInput;
+          storage.stage = 2;
+          content += userInput;
         } else if (userInput==='.'){
-          numberB += userInput;
-          content = content + parseFloat(numberB) + '.';
-          dotExisted = true;
-
+          storage.dotExisted = true;
+          currentNumber += userInput;
+          content = content + parseFloat(currentNumber) + '.';
         } else {
           saveLastOperator(userInput);
           content = content.slice(0,-1)+userInput;
