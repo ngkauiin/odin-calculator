@@ -82,7 +82,7 @@ buttons.forEach((button) => {
         if(isNumber(userInput)) {
           currentNumber += userInput;
           content = parseFloat(currentNumber)+'';
-        } else if (userInput==='.'){
+        } else if (userInput==='.') {
           if(!storage.dotExisted) {
             storage.dotExisted = true;
             currentNumber += '.';
@@ -102,10 +102,12 @@ buttons.forEach((button) => {
           currentNumber += userInput;
           storage.stage = 2;
           content += userInput;
-        } else if (userInput==='.' && !storage.dotExisted) {
-          storage.dotExisted = true;
-          currentNumber += '.';
-          content = content + parseFloat(currentNumber) + '.';
+        } else if(userInput==='.') {
+          if(!storage.dotExisted) {
+            storage.dotExisted = true;
+            currentNumber += '.';
+            content = content + parseFloat(currentNumber) + '.';
+          }
         } else {
           saveLastOperator(userInput);
           content = content.slice(0,-1)+userInput;
