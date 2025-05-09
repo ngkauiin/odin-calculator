@@ -63,7 +63,7 @@ buttons.forEach((button) => {
   button.addEventListener('click', () => {
     const userInput = button.className;
     if(userInput==='c') return clearAll();
-    if((userInput==='=') && !operator) return;  // ignore '=' at the very beginning
+    if((userInput==='=') && !storage.operator) return;  // ignore '=' at the very beginning
     
     // (stage 0) check if input is digit number, if so then add that to numberA
     // (stage 0>1) if the input changed to operator, keep the numberA and store the operator 
