@@ -68,7 +68,7 @@ buttons.forEach((button) => {
       case 0: // get first number
         if(isNumber(userInput)) {
           numberA += userInput;
-          content += userInput;
+          content = parseFloat(numberA)+'';
         } else {
           saveLastOperator(userInput);
           stage = 1;
@@ -79,7 +79,7 @@ buttons.forEach((button) => {
         if(isNumber(userInput)) {
           numberB += userInput;
           stage = 2;
-          content += userInput;
+          content = parseFloat(numberA)+operator+parseFloat(numberB)+'';
         } else {
           saveLastOperator(userInput);
           content = content.slice(0,-1)+userInput;
@@ -88,7 +88,7 @@ buttons.forEach((button) => {
       case 2: // get second number
         if(isNumber(userInput)) {
           numberB += userInput;
-          content += userInput;
+          content = parseFloat(numberA)+operator+parseFloat(numberB)+'';
         } else {
           const result = operate(numberA,numberB,operator);
           if(result===false) {
@@ -114,7 +114,7 @@ buttons.forEach((button) => {
           numberB = '0';
           operator = '';
           stage = 0;
-          content = userInput;
+          content = parseFloat(numberA)+'';
         } else {
           if (userInput === '=') {
             const result = operate(numberA,numberB,operator);
