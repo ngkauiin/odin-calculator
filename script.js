@@ -89,7 +89,7 @@ buttons.forEach((button) => {
         if(isNumber(userInput)) {
           numberB += userInput;
           stage = 2;
-          content = parseFloat(numberA)+operator+parseFloat(numberB)+'';
+          content+=userInput;
         } else if (userInput==='.'){
           numberB += userInput;
           content = content + parseFloat(numberB) + '.';
@@ -103,11 +103,11 @@ buttons.forEach((button) => {
       case 2: // get second number
         if(isNumber(userInput)) {
           numberB += userInput;
-          content = parseFloat(numberA)+operator+parseFloat(numberB)+'';
+          content += userInput;
         } else if (userInput==='.'){
           if(!dotExisted) {
             numberB += userInput;
-            content = parseFloat(numberA)+operator+parseFloat(numberB)+'.';
+            content += userInput;
             dotExisted = true;
           }
         } else {
@@ -117,7 +117,7 @@ buttons.forEach((button) => {
             dividedByZero();
             return;
           } else {
-            numberA = result+'';
+            numberA = result + '';
             content = roundNumberTo(numberA,toDecimal)+'';
           }
           if(userInput!=='=') {
