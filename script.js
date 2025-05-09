@@ -68,22 +68,27 @@ buttons.forEach((button) => {
       case 0:
         if(isNumber(userInput)) {
           numberA += userInput;
+          content += userInput;
         } else {
           saveLastOperator(userInput);
+          content += userInput;
           stage = 1;
         }
         break;
       case 1:
         if(isNumber(userInput)) {
           numberB += userInput;
+          content += userInput;
           stage = 2;
         } else {
           saveLastOperator(userInput);
+          content = content.slice(0,-1)+userInput;
         }
         break;
       case 2:
         if(isNumber(userInput)) {
           numberB += userInput;
+          content += userInput;
         } else {
           const result = operate(numberA,numberB,operator);
           if(result===false) {
@@ -92,7 +97,7 @@ buttons.forEach((button) => {
             break;
           } else {
             numberA = result+'';
-            display(roundNumberTo(numberA,toDecimal));
+            content = roundNumberTo(numberA,toDecimal)+'';
           }
           if(userInput!=='=') {
             saveLastOperator(userInput);
@@ -109,6 +114,8 @@ buttons.forEach((button) => {
           numberB = '0';
           operator = '';
           stage = 0;
+
+          content = userInput;
         } else {
           if (userInput === '=') {
             const result = operate(numberA,numberB,operator);
@@ -118,16 +125,18 @@ buttons.forEach((button) => {
               break;
             } else {
               numberA = result+'';
-              display(roundNumberTo(numberA,toDecimal));
+              content = roundNumberTo(numberA,toDecimal)+'';
             }
           } else {
             saveLastOperator(userInput);
+            content += userInput;
             numberB = '0';
             stage = 1;
           }
         }
         break;
     }
+    display(content);
   })
 })
 
@@ -135,9 +144,9 @@ function clearAll() {
   numberA = '0';
   numberB = '0';
   operator = '';
-  input = '';
+  content = '';
   stage = 0;
-  display(roundNumberTo(numberA, toDecimal));
+  display(numberA);
 }
 
 function saveLastOperator(input) {
