@@ -42,7 +42,7 @@ let stage = 0;
 let numberA = '0';
 let numberB = '0';
 let operator = '';
-let input = '';
+let content = '';
 let toDecimal = 7;
 
 clearAll();
@@ -66,7 +66,7 @@ buttons.forEach((button) => {
 
     switch (stage) {
       case 0:
-        if(parseInt(userInput) || parseInt(userInput) === 0) {
+        if(isNumber(userInput)) {
           numberA += userInput;
         } else {
           saveLastOperator(userInput);
@@ -74,15 +74,15 @@ buttons.forEach((button) => {
         }
         break;
       case 1:
-        if(!parseInt(userInput) && parseInt(userInput)!==0) {
-          saveLastOperator(userInput);
-        } else {
+        if(isNumber(userInput)) {
           numberB += userInput;
           stage = 2;
+        } else {
+          saveLastOperator(userInput);
         }
         break;
       case 2:
-        if(parseInt(userInput) || parseInt(userInput) === 0) {
+        if(isNumber(userInput)) {
           numberB += userInput;
         } else {
           const result = operate(numberA,numberB,operator);
@@ -104,7 +104,7 @@ buttons.forEach((button) => {
         }
         break;
       case 3:
-        if (parseInt(userInput) || parseInt(userInput) === 0) {
+        if (isNumber(userInput)) {
           numberA = userInput;
           numberB = '0';
           operator = '';
@@ -147,4 +147,8 @@ function saveLastOperator(input) {
 function roundNumberTo(num, precision) {
   let multiplier = Math.pow(10, precision || 0);
   return Math.round(num*multiplier)/multiplier;
+}
+
+function isNumber(userInput) {
+  if(parseFloat(userInput) || parseFloat(userInput) === 0) return true
 }
