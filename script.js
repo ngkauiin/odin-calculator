@@ -38,13 +38,8 @@ function display(content) {
   displayDiv.textContent = content;
 }
 
-let stage = 0;
-let numberA = '0';
-let numberB = '0';
-let operator = '';
 let content = '';
 let toDecimal = 7;
-let dotExisted = false;
 
 let currentNumber = '0';
 
