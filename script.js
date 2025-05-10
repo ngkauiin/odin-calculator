@@ -61,18 +61,6 @@ buttons.forEach((button) => {
     if(userInput==='c') return clearAll();
     if((userInput==='=') && !storage.operator) return;  // ignore '=' at the very beginning
     if((userInput==='backspace' && (storage.stage === 1 || storage.stage === 3))) return; // if there is no number to be backspace, do nothing
-    
-    // (stage 0) check if input is digit number, if so then add that to numberA
-    // (stage 0>1) if the input changed to operator, keep the numberA and store the operator 
-    // (stage 1) if the following input is also operator, keep changing the operator
-    // (stage 1>2) if the following input is a digit number, store the operator and start storing that input as numberB
-    // (stage 2) if the following input is a operator, store the numberB
-    // (stage 2) store the result as numberA, operate the math and display the value on HTML
-    // (stage 2) check if last operator !== '=', save the last operator and clear numberB and move to stage 1
-    // (stage 3) if operator==='=', go to stage 3
-    // (stage 3) if the next input is digits, CLEAR and go to stage 0
-    // (stage 3) if the next input is a oeprator (not =), clear numberB, store the operator and go to stage 1
-    // (stage 3) if the next input is also '=', do the operate(a,b,x) and display with the previous operator
 
     switch (storage.stage) {
       case 0: // get first number A
@@ -144,7 +132,6 @@ buttons.forEach((button) => {
           }
           if(userInput!=='=') {
             saveLastOperator(userInput);
-            // content+=userInput;
             content = createContentAs('numA+');
             saveToNumber('B','0');
             moveStage(1);
