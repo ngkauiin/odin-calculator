@@ -96,32 +96,32 @@ buttons.forEach((button) => {
           saveToNumber('A',currentNumber);
           saveLastOperator(userInput);
           moveStage(1);
-          content = createContentAs('numA + operator');
+          content = createContentAs('numA+');
         }
         break;
       case 1: // get operator
         if(isNumber(userInput)) {
           currentNumber += userInput;
           moveStage(2);
-          content += userInput;
+          content = createContentAs('numA+numB');
         } else if(userInput==='.') {
           if(!storage.dotExisted) {
             currentNumber_Dot();
-            content = content + parseFloat(currentNumber) + '.';
+            content = createContentAs('numA+numB') + '.';
           }
         } else {
           saveLastOperator(userInput);
-          content = createContentAs('numA + operator');
+          content = createContentAs('numA+');
         }
         break;
       case 2: // get second number B
         if(isNumber(userInput)) {
           currentNumber += userInput;
-          content = parseFloat(storage.numberA) + storage.operator + parseFloat(currentNumber)+'';
+          content = createContentAs('numA+numB')
         } else if (userInput==='.'){
           if(!storage.dotExisted) {
             currentNumber_Dot();
-            content = parseFloat(storage.numberA) + storage.operator + parseFloat(currentNumber)+'.';
+            content = createContentAs('numA+numB') + '.';
           }
         } else if (userInput==='backspace') {
           if (parseFloat(currentNumber).toString().length> 1) {
@@ -130,7 +130,7 @@ buttons.forEach((button) => {
             content = content.slice(0,-1);
           } else {
             currentNumber = '0'
-            content = parseFloat(storage.numberA) + storage.operator + parseFloat(currentNumber)+'';
+            content = createContentAs('numA+numB')
           }
         } else {
           saveToNumber('B',currentNumber);
@@ -140,11 +140,12 @@ buttons.forEach((button) => {
             return;
           } else {
             saveToNumber('A',result+'');
-            content = roundNumberTo(storage.numberA,toDecimal)+'';
+            content = createContentAs('result');
           }
           if(userInput!=='=') {
             saveLastOperator(userInput);
-            content+=userInput;
+            // content+=userInput;
+            content = createContentAs('numA+');
             saveToNumber('B','0');
             moveStage(1);
           } else if (userInput==='=') {
@@ -156,12 +157,12 @@ buttons.forEach((button) => {
         if (isNumber(userInput)) {
           currentNumber += userInput;
           moveStage(0);
-          content = parseFloat(currentNumber)+'';
+          content = createContentAs('numA');
         } else if (userInput==='.'){
           if(!dotExisted) {
             currentNumber_Dot();
             moveStage(0);
-            content = parseFloat(currentNumber)+'.';
+            content = createContentAs('numA')+'.';
           }
         } else {
           if (userInput === '=') {
@@ -171,11 +172,11 @@ buttons.forEach((button) => {
               return;
             } else {
               saveToNumber('A',result+'');
-              content = roundNumberTo(storage.numberA,toDecimal)+'';
+              content = createContentAs('result');
             }
           } else {
             saveLastOperator(userInput);
-            content += userInput;
+            content = createContentAs('numA+');
             saveToNumber('B','0');
             moveStage(1);
           }
@@ -251,12 +252,12 @@ function createContentAs(contentCode) {
   switch(contentCode) {
     case 'numA':
       return parseFloat(currentNumber)+'';
-    case 'numB':
-      return;
-    case 'numA + operator':
+    case 'numA+':
       return parseFloat(storage.numberA)+storage.operator+'';
-    case 3:
-      return;
+    case 'numA+numB':
+      return parseFloat(storage.numberA)+storage.operator+parseFloat(currentNumber)+'';
+    case 'result':
+      return roundNumberTo(storage.numberA,toDecimal)+'';
   }
 
 }
