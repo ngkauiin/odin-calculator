@@ -77,10 +77,18 @@ buttons.forEach((button) => {
         if(isNumber(userInput)) {
           currentNumber += userInput;
           content = parseFloat(currentNumber)+'';
-        } else if (userInput==='.') {
+        } else if(userInput==='.') {
           if(!storage.dotExisted) {
             currentNumber_Dot();
             content = parseFloat(currentNumber) + '.';
+          }
+        } else if(userInput==='backspace') {
+          if (parseFloat(currentNumber).toString().length>1) {
+            currentNumber = currentNumber.slice(0,-1);
+            content = content.slice(0,-1);
+          } else {
+            currentNumber = '0'
+            content = parseFloat(currentNumber)+'';
           }
         } else {
           saveToNumber('A',currentNumber);
