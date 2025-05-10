@@ -96,7 +96,7 @@ buttons.forEach((button) => {
           saveToNumber('A',currentNumber);
           saveLastOperator(userInput);
           moveStage(1);
-          content += userInput;
+          content = createContentAs('numA + operator');
         }
         break;
       case 1: // get operator
@@ -111,7 +111,7 @@ buttons.forEach((button) => {
           }
         } else {
           saveLastOperator(userInput);
-          content = content.slice(0,-1)+userInput;
+          content = createContentAs('numA + operator');
         }
         break;
       case 2: // get second number B
@@ -253,8 +253,8 @@ function createContentAs(contentCode) {
       return parseFloat(currentNumber)+'';
     case 'numB':
       return;
-    case 'operator':
-      return;
+    case 'numA + operator':
+      return parseFloat(storage.numberA)+storage.operator+'';
     case 3:
       return;
   }
