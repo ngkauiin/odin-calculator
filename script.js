@@ -38,6 +38,7 @@ function display(content) {
   displayDiv.textContent = content;
 }
 
+
 let content = '';
 let toDecimal = 7;
 
