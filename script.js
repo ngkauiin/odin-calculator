@@ -85,14 +85,14 @@ buttons.forEach((button) => {
         } else {
           saveToNumber('A',currentNumber);
           saveLastOperator(userInput);
-          storage.stage = 1;
+          moveStage(1);
           content += userInput;
         }
         break;
       case 1: // get operator
         if(isNumber(userInput)) {
           currentNumber += userInput;
-          storage.stage = 2;
+          moveStage(2);
           content += userInput;
         } else if(userInput==='.') {
           if(!storage.dotExisted) {
@@ -127,21 +127,21 @@ buttons.forEach((button) => {
             saveLastOperator(userInput);
             content+=userInput;
             saveToNumber('B','0');
-            storage.stage = 1;
+            moveStage(1);
           } else if (userInput==='=') {
-            storage.stage = 3;
+            moveStage(3);
           }
         }
         break;
       case 3: // transition after '='
         if (isNumber(userInput)) {
           currentNumber += userInput;
-          moveToStage_Zero();
+          moveStage(0);
           content = parseFloat(currentNumber)+'';
         } else if (userInput==='.'){
           if(!dotExisted) {
             currentNumber_Dot();
-            moveToStage_Zero();
+            moveStage(0);
             content = parseFloat(currentNumber)+'.';
           }
         } else {
@@ -158,7 +158,7 @@ buttons.forEach((button) => {
             saveLastOperator(userInput);
             content += userInput;
             saveToNumber('B','0');
-            storage.stage = 1;
+            moveStage(1);
           }
         }
         break;
@@ -209,8 +209,21 @@ function saveToNumber(index, value) {
   currentNumber = '0';
 }
 
-function moveToStage_Zero() {
-  storage.numberB = '0';
-  storage.operator = '';
-  storage.stage = 0;
+function moveStage(stageNumber) {
+  switch(stageNumber) {
+    case 0:
+      storage.numberB = '0';
+      storage.operator = '';
+      storage.stage = 0;
+      return;
+    case 1:
+      storage.stage = 1;
+      return;
+    case 2:
+      storage.stage = 2;
+      return;
+    case 3:
+      storage.stage = 3;
+      return;      
+  }
 }
