@@ -131,7 +131,7 @@ buttons.forEach((button) => {
           if(userInput!=='=') {
             saveLastOperator(userInput);
             content+=userInput;
-            storage.numberB = '0';
+            saveToNumber('B','0');
             storage.stage = 1;
           } else if (userInput==='=') {
             storage.stage = 3;
@@ -141,16 +141,12 @@ buttons.forEach((button) => {
       case 3: // transition after '='
         if (isNumber(userInput)) {
           currentNumber += userInput;
-          storage.numberB = '0';
-          storage.operator = '';
-          storage.stage = 0;
+          moveToStage_Zero();
           content = parseFloat(currentNumber)+'';
         } else if (userInput==='.'){
           if(!dotExisted) {
             currentNumber_Dot();
-            storage.numberB = '0';
-            storage.operator = '';
-            storage.stage = 0;
+            moveToStage_Zero();
             content = parseFloat(currentNumber)+'.';
           }
         } else {
@@ -166,7 +162,7 @@ buttons.forEach((button) => {
           } else {
             saveLastOperator(userInput);
             content += userInput;
-            storage.numberB = '0';
+            saveToNumber('B','0');
             storage.stage = 1;
           }
         }
@@ -222,5 +218,4 @@ function moveToStage_Zero() {
   storage.numberB = '0';
   storage.operator = '';
   storage.stage = 0;
-  content = parseFloat(currentNumber)+'.';
 }
