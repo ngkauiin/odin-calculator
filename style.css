@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+
+  /* font-family: "Tiny5", sans-serif;
+  font-weight: 200;
+  font-style: normal; */
+  font-size: 50px;
+}
+
+.digit-button-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 500px;
+  justify-content: center;
+}
+
+.digit-button-container button {
+  width: 100px;
+  height: 60px;
+  text-align: center;
+  flex-basis: 33%;
+}
+
+
