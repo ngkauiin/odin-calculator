@@ -59,6 +59,7 @@ buttons.forEach((button) => {
     const userInput = button.className;
     if(userInput==='c') return clearAll();
     if((userInput==='=') && !storage.operator) return;  // ignore '=' at the very beginning
+    if((userInput==='backspace' && (storage.stage === 1 || storage.stage === 3))) return; // if there is no number to be backspace, do nothing
     
     // (stage 0) check if input is digit number, if so then add that to numberA
     // (stage 0>1) if the input changed to operator, keep the numberA and store the operator 
@@ -83,7 +84,8 @@ buttons.forEach((button) => {
             content = parseFloat(currentNumber) + '.';
           }
         } else if(userInput==='backspace') {
-          if (parseFloat(currentNumber).toString().length>1) {
+          if (parseFloat(currentNumber).toString().length > 1) {
+            if (currentNumber.at(-1) === '.') storage.dotExisted = false;
             currentNumber = currentNumber.slice(0,-1);
             content = content.slice(0,-1);
           } else {
@@ -115,11 +117,20 @@ buttons.forEach((button) => {
       case 2: // get second number
         if(isNumber(userInput)) {
           currentNumber += userInput;
-          content += userInput;
+          content = parseFloat(storage.numberA) + storage.operator + parseFloat(currentNumber)+'';
         } else if (userInput==='.'){
           if(!storage.dotExisted) {
             currentNumber_Dot();
-            content += userInput;
+            content = parseFloat(storage.numberA) + storage.operator + parseFloat(currentNumber)+'.';
+          }
+        } else if (userInput==='backspace') {
+          if (parseFloat(currentNumber).toString().length> 1) {
+            if (currentNumber.at(-1) === '.') storage.dotExisted = false;
+            currentNumber = currentNumber.slice(0,-1);
+            content = content.slice(0,-1);
+          } else {
+            currentNumber = '0'
+            content = parseFloat(storage.numberA) + storage.operator + parseFloat(currentNumber)+'';
           }
         } else {
           saveToNumber('B',currentNumber);
