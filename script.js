@@ -74,14 +74,14 @@ buttons.forEach((button) => {
     // (stage 3) if the next input is also '=', do the operate(a,b,x) and display with the previous operator
 
     switch (storage.stage) {
-      case 0: // get first number
+      case 0: // get first number A
         if(isNumber(userInput)) {
           currentNumber += userInput;
-          content = parseFloat(currentNumber)+'';
+          content = createContentAs('numA');
         } else if(userInput==='.') {
           if(!storage.dotExisted) {
             currentNumber_Dot();
-            content = parseFloat(currentNumber) + '.';
+            content = createContentAs('numA') + '.';
           }
         } else if(userInput==='backspace') {
           if (parseFloat(currentNumber).toString().length > 1) {
@@ -90,7 +90,7 @@ buttons.forEach((button) => {
             content = content.slice(0,-1);
           } else {
             currentNumber = '0'
-            content = parseFloat(currentNumber)+'';
+            content = createContentAs('numA');
           }
         } else {
           saveToNumber('A',currentNumber);
@@ -114,7 +114,7 @@ buttons.forEach((button) => {
           content = content.slice(0,-1)+userInput;
         }
         break;
-      case 2: // get second number
+      case 2: // get second number B
         if(isNumber(userInput)) {
           currentNumber += userInput;
           content = parseFloat(storage.numberA) + storage.operator + parseFloat(currentNumber)+'';
@@ -245,4 +245,18 @@ function moveStage(stageNumber) {
       storage.stage = 3;
       return;      
   }
+}
+
+function createContentAs(contentCode) {
+  switch(contentCode) {
+    case 'numA':
+      return parseFloat(currentNumber)+'';
+    case 'numB':
+      return;
+    case 'operator':
+      return;
+    case 3:
+      return;
+  }
+
 }
