@@ -84,11 +84,11 @@ buttons.forEach((button) => {
             content = createContentAs('numA') + '.';
           }
         } else if(userInput==='backspace') {
+          if (currentNumber.at(-1) === '.') storage.dotExisted = false;
           if (parseFloat(currentNumber).toString().length > 1) {
-            if (currentNumber.at(-1) === '.') storage.dotExisted = false;
-            currentNumber = currentNumber.slice(0,-1);
-            content = content.slice(0,-1);
+            backspaceOneNumber();
           } else {
+            storage.dotExisted = false;
             currentNumber = '0'
             content = createContentAs('numA');
           }
@@ -124,10 +124,9 @@ buttons.forEach((button) => {
             content = createContentAs('numA+numB') + '.';
           }
         } else if (userInput==='backspace') {
+          if (currentNumber.at(-1) === '.') storage.dotExisted = false;
           if (parseFloat(currentNumber).toString().length> 1) {
-            if (currentNumber.at(-1) === '.') storage.dotExisted = false;
-            currentNumber = currentNumber.slice(0,-1);
-            content = content.slice(0,-1);
+            backspaceOneNumber();
           } else {
             currentNumber = '0'
             content = createContentAs('numA+numB')
@@ -259,5 +258,9 @@ function createContentAs(contentCode) {
     case 'result':
       return roundNumberTo(storage.numberA,toDecimal)+'';
   }
+}
 
+function backspaceOneNumber() {
+  currentNumber = currentNumber.slice(0,-1);
+  content = content.slice(0,-1);
 }
