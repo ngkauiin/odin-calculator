@@ -61,6 +61,7 @@ buttons.forEach((button) => {
     if(userInput==='c') return clearAll();
     if((userInput==='=') && !storage.operator) return;  // ignore '=' at the very beginning
     if((userInput==='backspace' && (storage.stage === 1 || storage.stage === 3))) return; // if there is no number to be backspace, do nothing
+    if((userInput==='fill-button')) return;
 
     switch (storage.stage) {
       case 0: // get first number A

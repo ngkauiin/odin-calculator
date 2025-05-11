@@ -2,24 +2,77 @@
   margin: 0;
   padding: 0;
 
-  /* font-family: "Tiny5", sans-serif;
-  font-weight: 200;
-  font-style: normal; */
-  font-size: 50px;
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 40px;
 }
 
-.digit-button-container {
+body {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.calculator {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.display,
+.calculator {
+  width: 390px;
+}
+
+.display {
+  text-align: end;
+  word-wrap: break-word;
+}
+
+
+button {
+  width: 90px;
+  text-align: center;
+  border-radius: 20px;
+  border-width: 0px;
+}
+
+.all-button-container {
+  display: flex;
+}
+
+.all-button-container,
+.digit-button-container,
+.other-button-container,
+.operator-button-container {
+  gap: 2px;
+}
+
+.digit-button-container button,
+.other-button-container button {
+  flex-basis: 32%;
+}
+
+.other-button-container {
+  margin-bottom: 2px;
+}
+
+.digit-button-container,
+.other-button-container {
   display: flex;
   flex-wrap: wrap;
-  width: 500px;
-  justify-content: center;
+
 }
 
-.digit-button-container button {
-  width: 100px;
-  height: 60px;
-  text-align: center;
-  flex-basis: 33%;
+.left-container,
+.operator-button-container {
+  display: flex;
+  flex-direction: column;
 }
 
-
+#equal-button {
+  background-color: orange;
+}
