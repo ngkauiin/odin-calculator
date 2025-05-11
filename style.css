@@ -29,7 +29,9 @@ body {
 
 .display {
   text-align: end;
-  word-wrap: break-word;
+  overflow-x: scroll;
+  margin-bottom: 2px;
+  scrollbar-width: thin;
 }
 
 

@@ -36,6 +36,7 @@ function operate(a, b, operator) {
 function display(content) {
   const displayDiv = document.querySelector('.display');
   displayDiv.textContent = content;
+  displayDiv.scrollLeft = displayDiv.scrollWidth;
 }
 
 
