@@ -182,6 +182,8 @@ function clearAll() {
     stage: 0,
     dotExisted: false,
   }
+
+  currentNumber = '0';
   content = storage.numberA;
   display(storage.numberA);
 }
